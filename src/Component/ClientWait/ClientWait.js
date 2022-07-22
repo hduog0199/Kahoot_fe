@@ -90,9 +90,9 @@ function ClientWait(props){
         });
     }, []);
 
-    if(!(auth.authenticated)) {
-        return <Redirect to='/Login' />
-    }
+    // if(!(auth.authenticated)) {
+    //     return <Redirect to='/Login' />
+    // }
     return(
         <div className="Container_ClientWait">
             <div className="display_score">

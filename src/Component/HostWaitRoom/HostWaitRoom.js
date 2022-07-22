@@ -67,9 +67,9 @@ function HostWaitRoom(props){
         fetchQuiz(props.location.state.data[0]);
         console.log("props.state", props.location.state.data[0])
       }, []);
-      if(!(auth.authenticated)) {
-        return <Redirect to='/Login' />
-    }
+    //   if(!(auth.authenticated)) {
+    //     return <Redirect to='/Login' />
+    // }
     return(
         <div className="Container_HostWaitRoom">
         <div className="display_header">

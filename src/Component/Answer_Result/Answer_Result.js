@@ -56,9 +56,9 @@ function Answer_Result(props){
     useEffect(() =>{
         socket.emit('get_data', gamePin)
     }, [])
-    if(!(auth.authenticated)) {
-        return <Redirect to='/Login' />
-    }
+    // if(!(auth.authenticated)) {
+    //     return <Redirect to='/Login' />
+    // }
     return(
         <div className="Container_Answer_Result">
             <header className="blue section">{quiz[q].question}</header>

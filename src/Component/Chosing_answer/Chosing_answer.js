@@ -59,9 +59,9 @@ function Chosing_answer(props){
       useEffect(() => {
         socket.emit('join_Room', gamePin);
     }, []); 
-    if(!(auth.authenticated)) {
-        return <Redirect to='/Login' />
-    }
+    // if(!(auth.authenticated)) {
+    //     return <Redirect to='/Login' />
+    // }
     return(
         <div className="Container_Chosing_answer">
             <header className="blue section">{quiz[q].question}</header>

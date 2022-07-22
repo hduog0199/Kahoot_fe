@@ -42,9 +42,9 @@ function Join_Game(props){
           console.log("ok")
   });
   }, []); 
-  if(!(auth.authenticated)) {
-    return <Redirect to='/Login' />
-  }
+  // if(!(auth.authenticated)) {
+  //   return <Redirect to='/Login' />
+  // }
     return(
         <div className="Container_LoginRoom">
             <div className="display_center">    

@@ -14,9 +14,9 @@ function LoginName(props,data){
     const {auth} = React.useContext(AppContext)
 
 
-    if(!(auth.authenticated)) {
-        return <Redirect to='/Login' />
-    }
+    // if(!(auth.authenticated)) {
+    //     return <Redirect to='/Login' />
+    // }
 
     const LoginRoom = () =>{
         if(Name.length !== 0){

@@ -58,9 +58,9 @@ function Scoreboard(props){
             }
         })
     }, [player])
-    if(!(auth.authenticated)) {
-        return <Redirect to='/Login' />
-    }
+    // if(!(auth.authenticated)) {
+    //     return <Redirect to='/Login' />
+    // }
     return(
         <div className="Container_ClientWait">
             <header className="ScoreBoard_title"><h3>Score Board</h3></header>
