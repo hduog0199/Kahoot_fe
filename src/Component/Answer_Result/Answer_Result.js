@@ -7,7 +7,8 @@ import {
     GrStatusGoodSmall,
     GrStatusCriticalSmall 
 } from "react-icons/gr";
-import {  withRouter } from "react-router-dom";
+import { AppContext } from '../../App';
+import {  withRouter, Redirect } from "react-router-dom";
 import { Socket } from 'socket.io-client';
 import io from "socket.io-client";
 const ENDPOINT = "http://localhost:4004";
@@ -18,6 +19,7 @@ const socket = io(
   });
 function Answer_Result(props){
     const[quiz, setQuiz] = useState(props.location.state.data[0])
+    const {auth} = React.useContext(AppContext)
     const [player, setPlayer] = useState(props.location.state.data[1])
     const[gamePin, setGamePin] = useState(props.location.state.data[2])
     const [q, setQ] = useState(0)
@@ -54,6 +56,9 @@ function Answer_Result(props){
     useEffect(() =>{
         socket.emit('get_data', gamePin)
     }, [])
+    if(!(auth.authenticated)) {
+        return <Redirect to='/Login' />
+    }
     return(
         <div className="Container_Answer_Result">
             <header className="blue section">{quiz[q].question}</header>

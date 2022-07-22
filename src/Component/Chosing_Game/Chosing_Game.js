@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import './Chosing_Game.css'
 import io from "socket.io-client";
-import {  withRouter } from "react-router-dom";
-const ENDPOINT = "http://localhost:4004";
+import {  withRouter, Redirect} from "react-router-dom";
+import { AppContext } from '../../App';
+const ENDPOINT = "http://localhost:4000";
 const socket = io(
     ENDPOINT,
     {
@@ -10,6 +11,7 @@ const socket = io(
   });
 function Chosing_Game(props) {
     const [listQuiz, setListQuiz] = useState([]);
+    const {auth} = React.useContext(AppContext)
     const fetchQuiz = async () => {
         const response = await fetch(
             'http://localhost:4000/quiz/sync' 
@@ -56,6 +58,9 @@ function Chosing_Game(props) {
         })
         console.log(rObj)
       }
+      if(!(auth.authenticated)) {
+        return <Redirect to='/Login' />
+    }
     return (
         <>
             <div id="back">

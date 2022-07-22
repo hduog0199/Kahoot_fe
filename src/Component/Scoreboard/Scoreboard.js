@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import './Scoreboard.css';
-import { withRouter } from "react-router-dom";
+import { withRouter, Redirect } from "react-router-dom";
+import { AppContext } from '../../App';
 import io from "socket.io-client";
 const ENDPOINT = "http://localhost:4000";
 const socket = io(
@@ -10,6 +11,7 @@ const socket = io(
   });
 function Scoreboard(props){
     const[quiz, setQuiz] = useState(props.location.state.data[0])
+    const {auth} = React.useContext(AppContext)
     const[gamePin, setGamePin] = useState(props.location.state.data[2])
     const [player, setPlayer] = useState([{ten: "loading", diem: 0}])
     // const [date, setDate] = useState(new Date())
@@ -56,6 +58,9 @@ function Scoreboard(props){
             }
         })
     }, [player])
+    if(!(auth.authenticated)) {
+        return <Redirect to='/Login' />
+    }
     return(
         <div className="Container_ClientWait">
             <header className="ScoreBoard_title"><h3>Score Board</h3></header>

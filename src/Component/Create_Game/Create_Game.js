@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 import axios from 'axios';
 import './Create_Game.css';
 import io from "socket.io-client";
-import {  withRouter } from "react-router-dom";
+import { AppContext } from '../../App';
+import {  withRouter, Redirect } from "react-router-dom";
 import Create_Question from '../Create_Questions/Create_Question';
 const socket = io();
 function Create_Game(props) {
+    const {auth} = React.useContext(AppContext)
     const [question_array, setQuestion_array] = useState([0])
     const [questions, setQuestions] = useState([{
         question: '',
@@ -56,6 +58,10 @@ function Create_Game(props) {
         axios.post("http://localhost:4000/quiz/new", {
             quiz: update
         }).then(console.log("gui thanh cong"));
+    }
+
+    if(!(auth.authenticated)) {
+        return <Redirect to='/Login' />
     }
     return (
         <>

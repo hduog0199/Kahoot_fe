@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './HostWaitRoom.css';
-import { withRouter } from "react-router-dom";
+import { withRouter, Redirect } from "react-router-dom";
+import { AppContext } from '../../App';
 import { FaUserAlt } from "react-icons/fa";
 import io from "socket.io-client";
 const ENDPOINT = "http://localhost:4000";
@@ -10,6 +11,7 @@ const socket = io(
     transports: ['websocket']
   });
 function HostWaitRoom(props){
+    const {auth} = React.useContext(AppContext)
     const [isLock, setIsLock] = useState(true)
     const[gamePin, setGamePin] = useState(props.location.state.data[1])
     const [listPlayer, setListPlayer] = useState([]);
@@ -65,6 +67,9 @@ function HostWaitRoom(props){
         fetchQuiz(props.location.state.data[0]);
         console.log("props.state", props.location.state.data[0])
       }, []);
+      if(!(auth.authenticated)) {
+        return <Redirect to='/Login' />
+    }
     return(
         <div className="Container_HostWaitRoom">
         <div className="display_header">

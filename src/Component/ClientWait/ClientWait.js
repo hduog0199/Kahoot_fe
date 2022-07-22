@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import './ClientWait.css';
-import { withRouter } from "react-router-dom";
+import { withRouter, Redirect } from "react-router-dom";
 import Player_Choose from '../Player_Choose/Player_Choose'
 import io from "socket.io-client";
-const ENDPOINT = "http://localhost:4004";
+import { AppContext } from '../../App';
+
+const ENDPOINT = "http://localhost:4000";
 const socket = io(
     ENDPOINT,
     {
@@ -21,6 +23,7 @@ function ClientWait(props){
     const [timeUp, setTimeUp] = useState(false)
     const [correct, setCorrect] = useState(false)
     const[display, setDisplay] = useState(false)
+    const {auth} = React.useContext(AppContext)
     const handleClick = () => {
         setStatus(-1)
     }
@@ -86,6 +89,10 @@ function ClientWait(props){
             }
         });
     }, []);
+
+    if(!(auth.authenticated)) {
+        return <Redirect to='/Login' />
+    }
     return(
         <div className="Container_ClientWait">
             <div className="display_score">

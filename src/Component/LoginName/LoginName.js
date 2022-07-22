@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import './LoginName.css';
 import io from "socket.io-client";
-import { withRouter } from "react-router-dom";
-const ENDPOINT = "http://localhost:4004";
+import { AppContext } from '../../App';
+import { withRouter, Redirect} from "react-router-dom";
+const ENDPOINT = "http://localhost:4000";
 const socket = io(
     ENDPOINT,
     {
@@ -10,6 +11,13 @@ const socket = io(
   });
 function LoginName(props,data){
     const [Name, setName] = useState('')
+    const {auth} = React.useContext(AppContext)
+
+
+    if(!(auth.authenticated)) {
+        return <Redirect to='/Login' />
+    }
+
     const LoginRoom = () =>{
         if(Name.length !== 0){
             socket.emit('Player_join', Name, props.location.state.data[0], props.location.state.data[1]);

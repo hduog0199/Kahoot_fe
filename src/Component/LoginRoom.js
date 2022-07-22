@@ -1,16 +1,20 @@
 import React, {useState, useEffect} from 'react'
 import './LoginRoom.css';
 import io from "socket.io-client";
-import { withRouter } from "react-router-dom";
-const ENDPOINT = "http://localhost:4004";
+import { withRouter,Redirect } from "react-router-dom";
+import { AppContext } from '../App';
+const ENDPOINT = "http://localhost:4000";
 const socket = io(
     ENDPOINT,
     {
     transports: ['websocket']
   });
 function Join_Game(props){
+    const {auth} = React.useContext(AppContext)
     const [gamePin, setGamePin] = useState();
     const [socket_id, setSocket_id] = useState('')
+
+   
     const LoginRoom = () =>{
         socket.emit('check_GamePin', gamePin, function(Game_Pin_exist){
             if(Game_Pin_exist){
@@ -38,6 +42,9 @@ function Join_Game(props){
           console.log("ok")
   });
   }, []); 
+  if(!(auth.authenticated)) {
+    return <Redirect to='/Login' />
+  }
     return(
         <div className="Container_LoginRoom">
             <div className="display_center">    

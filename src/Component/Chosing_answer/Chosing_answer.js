@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import './Chosing_answer.css';
-import {  withRouter } from "react-router-dom";
+import {  withRouter, Redirect } from "react-router-dom";
+import { AppContext } from '../../App';
 import { 
     GrStatusWarningSmall, 
     GrStatusUnknownSmall,
@@ -15,6 +16,7 @@ const socket = io(
     transports: ['websocket']
   });
 function Chosing_answer(props){
+    const {auth} = React.useContext(AppContext)
     const [quiz, setQuiz] = useState(props.location.state.data[0])
     const[gamePin, setGamePin] = useState(props.location.state.data[2])
     const [answer, setAnswer] = useState(0);
@@ -57,6 +59,9 @@ function Chosing_answer(props){
       useEffect(() => {
         socket.emit('join_Room', gamePin);
     }, []); 
+    if(!(auth.authenticated)) {
+        return <Redirect to='/Login' />
+    }
     return(
         <div className="Container_Chosing_answer">
             <header className="blue section">{quiz[q].question}</header>
