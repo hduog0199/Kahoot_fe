@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './LoginName.css';
 import io from "socket.io-client";
 import { withRouter } from "react-router-dom";
-const ENDPOINT = "http://localhost:4000";
+const ENDPOINT = "http://localhost:4004";
 const socket = io(
     ENDPOINT,
     {

@@ -89,3 +89,7 @@ h1 {
 .Create_Game:hover {
   cursor: pointer;
 }
+
+.Author {
+  margin-top: 200px;
+}

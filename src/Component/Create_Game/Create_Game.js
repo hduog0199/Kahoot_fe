@@ -62,7 +62,7 @@ function Create_Game(props) {
             <h1 className="title">Quiz Creator Studio</h1>  
             <div className="form-field">
                 <label className="quizTitle">Quiz Title</label>
-                <input className="name" value={quiz.quiz_name} name={'quiz_name'} type="text" onChange={quiz_nameChange}/>
+                <input className="nameInput" value={quiz.quiz_name} name={'quiz_name'} type="text" onChange={quiz_nameChange}/>
             </div>
             <br />
             <br />
@@ -82,14 +82,16 @@ function Create_Game(props) {
                 }
             </div>
             <br />
-            <button onClick={addQuestion}>Add another question</button>
-            <br />
-            <br />
-            <div className="form-field">
-                <button onClick={() => sendquiz()}>Create Quiz</button>
+            <div className='wrap-button'>
+                <button className='button' onClick={addQuestion}>Add another question</button>
+                <br />
+                <br />
+                <div>
+                    <button className='button' onClick={() => sendquiz()}>Create Quiz</button>
+                </div>
+                <br />
+                <button className='button' onClick={() => props.history.goBack()}>Cancel quiz and return to quiz selection</button>
             </div>
-            <br />
-            <button onClick={() => props.history.goBack()}>Cancel quiz and return to quiz selection</button>
         </>
     )
 }

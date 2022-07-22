@@ -3,7 +3,7 @@ import './ClientWait.css';
 import { withRouter } from "react-router-dom";
 import Player_Choose from '../Player_Choose/Player_Choose'
 import io from "socket.io-client";
-const ENDPOINT = "http://localhost:4000";
+const ENDPOINT = "http://localhost:4004";
 const socket = io(
     ENDPOINT,
     {

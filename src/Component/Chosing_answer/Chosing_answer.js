@@ -8,7 +8,7 @@ import {
     GrStatusCriticalSmall 
 } from "react-icons/gr";
 import io from "socket.io-client";
-const ENDPOINT = "http://localhost:4000";
+const ENDPOINT = "http://localhost:4004";
 const socket = io(
     ENDPOINT,
     {

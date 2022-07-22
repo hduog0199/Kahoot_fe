@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import './Chosing_Game.css'
 import io from "socket.io-client";
 import {  withRouter } from "react-router-dom";
-const ENDPOINT = "http://localhost:4000";
+const ENDPOINT = "http://localhost:4004";
 const socket = io(
     ENDPOINT,
     {
@@ -12,7 +12,7 @@ function Chosing_Game(props) {
     const [listQuiz, setListQuiz] = useState([]);
     const fetchQuiz = async () => {
         const response = await fetch(
-            'http://localhost:4000/quiz/sync'
+            'http://localhost:4000/quiz/sync' 
           );
         const jsonData = await response.json()
         console.log("list quiz", jsonData)
@@ -58,12 +58,14 @@ function Chosing_Game(props) {
       }
     return (
         <>
-            <a id="back" href="../">Back</a>
+            <div id="back">
+              <a className='font' href="/">Back</a>
+            </div>
             <h1 id="title">Start a Kahoot Game</h1>
             <h4 id="subtitle">Choose a Game Below or <a id="link" onClick={() => {props.history.push({pathname: '/Create_Game'})}}>Create your Own!</a></h4>
             <div id="game-list">
             {listQuiz.map((obj, i) => {
-              return <div onClick={() => startGame(obj._id) } id="title" key={i}>{obj.quiz.quiz_name}</div>;
+              return <div onClick={() => startGame(obj._id) } className='desc' key={i}>{obj.quiz.quiz_name}</div>;
             })}
             </div>
         </>

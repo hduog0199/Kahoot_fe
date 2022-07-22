@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import './LoginRoom.css';
 import io from "socket.io-client";
 import { withRouter } from "react-router-dom";
-const ENDPOINT = "http://localhost:4000";
+const ENDPOINT = "http://localhost:4004";
 const socket = io(
     ENDPOINT,
     {
@@ -54,6 +54,7 @@ function Join_Game(props){
                         Or create your game !!!
                       </h3>
                     </div>
+                    <h3 className='Create_Game Author'>CREATE BY GROUP 3</h3>
                 </div>
             </div>
         </div>
