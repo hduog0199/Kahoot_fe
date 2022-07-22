@@ -58,9 +58,9 @@ function Chosing_Game(props) {
         })
         console.log(rObj)
       }
-    //   if(!(auth.authenticated)) {
-    //     return <Redirect to='/Login' />
-    // }
+      if(!(auth.authenticated)) {
+        return <Redirect to='/Login' />
+    }
     return (
         <>
             <div id="back">
